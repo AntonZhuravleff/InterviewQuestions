@@ -13,20 +13,18 @@ namespace TechQuestions.Core.Entities
         private readonly List<Tag> _tags = new List<Tag>();
         public IReadOnlyCollection<Tag> Tags => _tags.AsReadOnly();
 
+        public int CategoryId { get; set; }
         public Category Category { get; private set; }
 
         public string QuestionText { get; private set; }
 
         public string Answer { get; private set; }
 
-        public Question(Category category,
-            string questionText,
-            string answer,
-            IEnumerable<Tag> tags = null)
+        public Question(int categoryId, string questionText, string answer, IEnumerable<Tag> tags = null)
         {
-            Guard.Against.Null(category, nameof(category));
+            Guard.Against.Zero(categoryId, nameof(categoryId));
 
-            Category = category;
+            CategoryId = categoryId;
             SetQuestionText(questionText);
             SetAnswer(answer);
             AppendTags(tags);

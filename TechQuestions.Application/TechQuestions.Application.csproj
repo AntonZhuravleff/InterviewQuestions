@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ardalis.GuardClauses" Version="4.1.1" />
-    <PackageReference Include="Ardalis.Specification" Version="7.0.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Specifications\" />
+    <ProjectReference Include="..\TechQuestions.Core\TechQuestions.Core.csproj" />
   </ItemGroup>
 
 </Project>

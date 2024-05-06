@@ -79,9 +79,9 @@ namespace TechQuestions.Infrastructure.Data
 
             return new List<Question>
             {
-                new(sharpCategory, "What is the difference between an abstract class and an interface?", "Sample answer 1"),
-                new(sharpCategory, "What is the purpose of the Startup class?", "Sample answer 2", new Tag[] { webTag, aspnetTag }),
-                new(mssqlCategory, "What is COALESCE in SQL Server?", "Sample answer 3"),
+                new(sharpCategory.Id, "What is the difference between an abstract class and an interface?", "Sample answer 1"),
+                new(sharpCategory.Id, "What is the purpose of the Startup class?", "Sample answer 2", new Tag[] { webTag, aspnetTag }),
+                new(mssqlCategory.Id, "What is COALESCE in SQL Server?", "Sample answer 3"),
             };
         }
     }
