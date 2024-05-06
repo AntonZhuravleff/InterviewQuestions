@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Hosting;
+
 namespace TechQuestions.Web
 {
     public class Program
@@ -8,6 +10,7 @@ namespace TechQuestions.Web
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
 
@@ -21,9 +24,9 @@ namespace TechQuestions.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
-
+            
             app.UseAuthorization();
 
             app.MapRazorPages();
