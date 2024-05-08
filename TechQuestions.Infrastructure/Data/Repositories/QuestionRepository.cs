@@ -11,10 +11,7 @@ namespace TechQuestions.Infrastructure.Data.Repositories
 {
     public class QuestionRepository : BaseRepository<Question>, IQuestionRepository
     {
-        public QuestionRepository(QuestionsDbContext dbContext) : base(dbContext)
-        {
-
-        }
+        public QuestionRepository(QuestionsDbContext dbContext) : base(dbContext) {}
         public async Task<IEnumerable<Question>> GetQuestionByCategoryAsync(int categoryId)
         {
             return await _dbContext.Questions

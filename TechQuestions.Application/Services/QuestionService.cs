@@ -9,6 +9,7 @@ using TechQuestions.Application.Mapper;
 using TechQuestions.Application.Models;
 using TechQuestions.Core.Entities;
 using TechQuestions.Core.Interfaces.Repositories;
+using TechQuestions.Core.Specifications;
 
 namespace TechQuestions.Application.Services
 {
@@ -21,17 +22,17 @@ namespace TechQuestions.Application.Services
             _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository)); ;
         }
 
-        public async Task<QuestionModel> GetQuestionById(int questionId)
+        public async Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterPaginatedSpecification spec)
         {
-            var question = await _questionRepository.GetByIdAsync(questionId);
-            var mapped = ObjectMapper.Mapper.Map<QuestionModel>(question);
+            var questions = await _questionRepository.ListAsync(spec);
+            var mapped = ObjectMapper.Mapper.Map<IEnumerable<QuestionModel>>(questions);
             return mapped;
         }
 
-        public async Task<IEnumerable<QuestionModel>> GetQuestionByCategory(int categoryId)
+        public async Task<QuestionModel> GetById(int questionId)
         {
-            var questionList = await _questionRepository.GetQuestionByCategoryAsync(categoryId);
-            var mapped = ObjectMapper.Mapper.Map<IEnumerable<QuestionModel>>(questionList);
+            var question = await _questionRepository.GetByIdAsync(questionId);
+            var mapped = ObjectMapper.Mapper.Map<QuestionModel>(question);
             return mapped;
         }
 

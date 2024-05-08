@@ -1,4 +1,13 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using TechQuestions.Application.Interfaces;
+using TechQuestions.Application.Services;
+using TechQuestions.Core.Interfaces.Repositories;
+using TechQuestions.Infrastructure.Data;
+using TechQuestions.Infrastructure.Data.Repositories;
+using TechQuestions.Web.Interfaces;
+using TechQuestions.Web.Services;
 
 namespace TechQuestions.Web
 {
@@ -12,7 +21,23 @@ namespace TechQuestions.Web
             builder.Services.AddRazorPages();
             builder.Services.AddAutoMapper(typeof(Program));
 
+       
+            // use in-memory database
+            builder.Services.AddDbContext<QuestionsDbContext>(c =>
+                c.UseInMemoryDatabase("TechInterviewQuestionsDB"));
+
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+            
+            builder.Services.AddScoped<IQuestionService, QuestionService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ITagsService, TagsService>();
+
+            builder.Services.AddScoped<IQuestionViewModelService, QuestionViewModelService>();
+ 
             var app = builder.Build();
+
+            SeedDatabase(app.Services, app.Logger).Wait();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -30,8 +55,26 @@ namespace TechQuestions.Web
             app.UseAuthorization();
 
             app.MapRazorPages();
-
+   
             app.Run();
+        }
+
+        public static async Task SeedDatabase(IServiceProvider serviceProvider, ILogger logger)
+        {
+            using (IServiceScope scope = serviceProvider.CreateScope())
+            {
+                var scopedProvider = scope.ServiceProvider;
+                try
+                {
+                    var catalogContext = scopedProvider.GetRequiredService<QuestionsDbContext>();
+                    await QuestionsDbContextSeed.SeedAsync(catalogContext, logger);
+
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
         }
     }
 }

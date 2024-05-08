@@ -20,7 +20,16 @@ namespace TechQuestions.Core.Entities
 
         public string Answer { get; private set; }
 
-        public Question(int categoryId, string questionText, string answer, IEnumerable<Tag> tags = null)
+        public Question(int categoryId, string questionText, string answer)
+        {
+            Guard.Against.Zero(categoryId, nameof(categoryId));
+
+            CategoryId = categoryId;
+            SetQuestionText(questionText);
+            SetAnswer(answer);
+        }
+
+        public Question(int categoryId, string questionText, string answer, IEnumerable<Tag> tags)
         {
             Guard.Against.Zero(categoryId, nameof(categoryId));
 
