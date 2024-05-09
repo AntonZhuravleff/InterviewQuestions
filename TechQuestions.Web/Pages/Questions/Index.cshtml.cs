@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TechQuestions.Web.Interfaces;
 using TechQuestions.Web.ViewModels;
 
-namespace TechQuestions.Web.Pages
+namespace TechQuestions.Web.Pages.Questions
 {
-    public class QuestionListModel : PageModel
+    public class IndexModel : PageModel
     {  
           private readonly IQuestionViewModelService _questionViewModelService;
-          public QuestionListViewModel QuestionsViewModel { get; set; }
+          public QuestionsViewModel QuestionsViewModel { get; set; }
 
-          public QuestionListModel(IQuestionViewModelService questionViewModelService)
+          public IndexModel(IQuestionViewModelService questionViewModelService)
           {
               _questionViewModelService = questionViewModelService;
           }

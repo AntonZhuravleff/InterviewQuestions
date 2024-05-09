@@ -29,7 +29,7 @@ namespace TechQuestions.Web.Services
         }
 
 
-        public async Task<QuestionListViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
+        public async Task<QuestionsViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
         {
             var filterSpecification = new QuestionsFilterPaginatedSpecification(page * questionsPerPage, questionsPerPage, categoryId, tagIds);
             var questioins = await _questionAppService.ListAsync(filterSpecification);
@@ -38,7 +38,7 @@ namespace TechQuestions.Web.Services
             var categories = await _categoryAppService.ListAsync();
             var mappedCategories = _mapper.Map<IEnumerable<CategoryViewModel>>(categories);
 
-            var questionsVM = new QuestionListViewModel()
+            var questionsVM = new QuestionsViewModel()
             {
                 Categories = mappedCategories,
                 Questions = mappedQuestions

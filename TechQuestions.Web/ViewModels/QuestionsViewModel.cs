@@ -1,6 +1,6 @@
 ﻿namespace TechQuestions.Web.ViewModels
 {
-    public class QuestionListViewModel
+    public class QuestionsViewModel
     {
         public IEnumerable<CategoryViewModel> Categories { get; set; }
         public IEnumerable<TagViewModel> Tags { get; set; }
