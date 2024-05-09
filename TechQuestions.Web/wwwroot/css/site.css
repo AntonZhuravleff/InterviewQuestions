@@ -17,6 +17,7 @@ body {
   margin-bottom: 60px;
 }
 
+
 /*Category card*/
 .category-card {
     padding: 2px;
@@ -33,4 +34,31 @@ body {
 
 .category-card__name {
     height: 1.5rem;
+    color: white;
+}
+
+
+/*Question card*/
+
+.question-card {
+    border: solid 1px #cdcdcd;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
+
+.question-card__body {
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
+}
+
+.question-card__last-updated {
+    margin: 0 0 0.5rem 0;
+}
+
+.question-card__category {
+    display: flex;
+    justify-content: center;
+}
+
+.question-card__category > h1 {
+    color: white;
 }

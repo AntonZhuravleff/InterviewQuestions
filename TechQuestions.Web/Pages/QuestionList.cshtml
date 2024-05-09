@@ -4,32 +4,34 @@
 }
 <div class="text-center">>
     <div class="container">
-        <ul class="d-flex justify-content-start" style ="list-style-type: none;">
+        <ul class="d-flex justify-content-start mb-5" style ="list-style-type: none;">
             @foreach (var category in @Model.QuestionsViewModel.Categories)
             {
                 <li>
                     <div class="category-card">
                         <img class="category-card__image" src="@(Constants.CATEGORY_IMAGES_PATH + category.ImageName)" alt="@category.Name">
-                        <div class="category-card__name">
+                        <div class="category-card__name" style="background-color: @category.Color;">
                             <h5 class="category-card__name-text">@category.Name</h5>
                         </div>
                     </div>
                 </li>
             }
         </ul>
+
+        <h2 class="h2">Questions:</h2>
         @foreach (var question in @Model.QuestionsViewModel.Questions)
         {
-            <div class="card text-start mb-3">
+            <div class="question-card text-start mb-3">
                 <div class="row g-0">
-                    <div class="col-md-10">
-                        <div class="card-body">
-                            <h5 class="card-title">@question.QuestionText</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <div class="col-md-9">
+                        <div class="question-card__body">
+                            <h5 class="question-card__title">@question.QuestionText</h5>
+                            <p class="question-card__short-answer">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="question-card__last-updated"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
                     </div>
-                    <div class="col-md-2 text-center d-flex">
-                        <h1 class="row justify-content-center align-self-center">@question.Category.Name</h1>
+                    <div class="question-card__category col-md-3 d-flex" style="background-color: @question.Category.Color;">
+                        <h1 class="align-self-center">@question.Category.Name</h1>
                     </div>
                 </div>
             </div>

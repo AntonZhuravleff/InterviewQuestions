@@ -51,9 +51,9 @@ namespace TechQuestions.Infrastructure.Data
         {
             return new List<Category>
             {
-                new("C#","category_csharp.png"),
-                new("MSSQL","category_mssql.png"),
-                new("Git", "category_git.png"),
+                new("C#","#512bd4","category_csharp.png"),
+                new("MSSQL","#0078d4","category_mssql.png"),
+                new("Git", "#f14e32", "category_git.png"),
             };
         }
 
