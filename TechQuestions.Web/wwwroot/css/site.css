@@ -16,3 +16,21 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*Category card*/
+.category-card {
+    padding: 2px;
+    width: 10rem;
+    margin: 0 2rem 0 2rem;
+}
+
+.category-card__image {
+    height: 10rem;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.category-card__name {
+    height: 1.5rem;
+}

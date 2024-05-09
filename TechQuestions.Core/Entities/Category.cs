@@ -10,12 +10,15 @@ namespace TechQuestions.Core.Entities
     public class Category : BaseEntity
     {
         public string Name { get; private set; }
+        public string ImageName { get; set; }
 
-        public Category(string name)
+        public Category(string name, string imageName)
         {
             Guard.Against.NullOrEmpty(name, nameof(name));
+            Guard.Against.NullOrEmpty(imageName, nameof(imageName));
 
             Name = name;
+            ImageName = imageName;
         }
     }
 }
