@@ -13,6 +13,7 @@ namespace TechQuestions.Application.Models
         public int CategoryId { get; set; }
         public CategoryModel Category { get; set; }
         public string QuestionText { get; set; }
+        public string ShortAnswer { get; set; }
         public string Answer { get; set; }
     }
 }

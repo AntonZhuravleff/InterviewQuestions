@@ -9,6 +9,7 @@ namespace TechQuestions.Web.Mapper
         public WebProfile() 
         { 
             CreateMap<QuestionModel, QuestionViewModel> ().ReverseMap();
+            CreateMap<QuestionModel, QuestionPreviewViewModel>().ReverseMap();
             CreateMap<CategoryModel, CategoryViewModel>().ReverseMap();
             CreateMap<TagModel, TagViewModel>().ReverseMap();
         }

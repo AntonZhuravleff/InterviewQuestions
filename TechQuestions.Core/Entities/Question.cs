@@ -15,9 +15,8 @@ namespace TechQuestions.Core.Entities
 
         public int CategoryId { get; set; }
         public Category Category { get; private set; }
-
         public string QuestionText { get; private set; }
-
+        public string? ShortAnswer { get; private set; }
         public string Answer { get; private set; }
 
         public Question(int categoryId, string questionText, string answer)
@@ -39,6 +38,17 @@ namespace TechQuestions.Core.Entities
             AppendTags(tags);
         }
 
+        public Question(int categoryId, string questionText, string shortAnswer, string answer, IEnumerable<Tag> tags)
+        {
+            Guard.Against.Zero(categoryId, nameof(categoryId));
+
+            CategoryId = categoryId;
+            SetQuestionText(questionText);
+            SetShortAnswer(shortAnswer);
+            SetAnswer(answer);
+            AppendTags(tags);
+        }
+
         public void SetQuestionText(string questionText)
         {
             Guard.Against.NullOrEmpty(questionText, nameof(questionText));
@@ -51,6 +61,13 @@ namespace TechQuestions.Core.Entities
             Guard.Against.NullOrEmpty(answer, nameof(answer));
 
             Answer = answer;
+        }
+
+        public void SetShortAnswer(string shortAnswer)
+        {
+            Guard.Against.NullOrEmpty(shortAnswer, nameof(shortAnswer));
+
+            ShortAnswer = shortAnswer;
         }
 
         public void AppendTag(Tag tagToAppend)

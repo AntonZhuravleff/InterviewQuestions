@@ -32,8 +32,8 @@ namespace TechQuestions.Web.Services
         public async Task<QuestionsViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
         {
             var filterSpecification = new QuestionsFilterPaginatedSpecification(page * questionsPerPage, questionsPerPage, categoryId, tagIds);
-            var questioins = await _questionAppService.ListAsync(filterSpecification);
-            var mappedQuestions = _mapper.Map<IEnumerable<QuestionViewModel>>(questioins);
+            var questions = await _questionAppService.ListAsync(filterSpecification);
+            var mappedQuestions = _mapper.Map<IEnumerable<QuestionPreviewViewModel>>(questions);
 
             var categories = await _categoryAppService.ListAsync();
             var mappedCategories = _mapper.Map<IEnumerable<CategoryViewModel>>(categories);
