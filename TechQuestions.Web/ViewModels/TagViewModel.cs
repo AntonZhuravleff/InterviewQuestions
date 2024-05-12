@@ -1,6 +1,8 @@
-﻿namespace TechQuestions.Web.ViewModels
+﻿using TechQuestions.Web.ViewModels.Base;
+
+namespace TechQuestions.Web.ViewModels
 {
-    public class TagViewModel
+    public class TagViewModel : BaseViewModel
     {
         public string Name { get; set; }
     }

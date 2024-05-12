@@ -1,6 +1,8 @@
-﻿namespace TechQuestions.Web.ViewModels
+﻿using TechQuestions.Web.ViewModels.Base;
+
+namespace TechQuestions.Web.ViewModels
 {
-    public class QuestionPreviewViewModel
+    public class QuestionPreviewViewModel : BaseViewModel
     {
         public List<TagViewModel> Tags = new List<TagViewModel>();
         public int? CategoryId { get; set; }

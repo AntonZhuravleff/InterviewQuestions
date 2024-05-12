@@ -1,8 +1,9 @@
 ﻿using TechQuestions.Application.Models;
+using TechQuestions.Web.ViewModels.Base;
 
 namespace TechQuestions.Web.ViewModels
 {
-    public class QuestionViewModel
+    public class QuestionViewModel : BaseViewModel
     {
         public List<TagViewModel> Tags = new List<TagViewModel>();
         public int? CategoryId { get; set; }

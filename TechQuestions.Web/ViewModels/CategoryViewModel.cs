@@ -1,6 +1,8 @@
-﻿namespace TechQuestions.Web.ViewModels
+﻿using TechQuestions.Web.ViewModels.Base;
+
+namespace TechQuestions.Web.ViewModels
 {
-    public class CategoryViewModel
+    public class CategoryViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string Color { get; set; }
