@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using TechQuestions.Application.Interfaces;
+using TechQuestions.Application.Models;
 using TechQuestions.Core.Entities;
 using TechQuestions.Core.Specifications;
 using TechQuestions.Web.Interfaces;
@@ -28,7 +29,6 @@ namespace TechQuestions.Web.Services
             _mapper = mapper;
         }
 
-
         public async Task<QuestionsViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
         {
             var filterSpecification = new QuestionsFilterPaginatedSpecification(page * questionsPerPage, questionsPerPage, categoryId, tagIds);
@@ -45,6 +45,13 @@ namespace TechQuestions.Web.Services
             };
 
             return questionsVM;
+        }
+
+        public async Task AddQuestion(QuestionViewModel questionViewModel)
+        {
+            var mappedQuestion = _mapper.Map<QuestionModel>(questionViewModel);
+
+            await _questionAppService.Create(mappedQuestion);
         }
     }
 }

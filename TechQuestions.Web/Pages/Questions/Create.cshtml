@@ -2,3 +2,34 @@
 @model TechQuestions.Web.Pages.Questions.CreateModel
 @{
 }
+
+<form method="post">
+    <div class="form-group mb-3">
+        <label asp-for="QuestionViewModel.QuestionText"></label>
+        <input asp-for="QuestionViewModel.QuestionText" class="form-control" />
+        <span asp-validation-for="QuestionViewModel.QuestionText"></span>
+    </div>
+    <div class="form-group  mb-3">
+        <label asp-for="QuestionViewModel.Category"></label>
+        <select asp-for="QuestionViewModel.CategoryId" 
+        asp-items="@new SelectList(Model.Categories, nameof(ViewModels.CategoryViewModel.Id), nameof(ViewModels.CategoryViewModel.Name))" 
+        class="form-control">
+            <option value="">Select category</option>
+        </select>
+        <span asp-validation-for="QuestionViewModel.CategoryId"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="QuestionViewModel.ShortAnswer"></label>
+        <input asp-for="QuestionViewModel.ShortAnswer" class="form-control" />
+        <span asp-validation-for="QuestionViewModel.ShortAnswer"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="QuestionViewModel.Answer"></label>
+        <input asp-for="QuestionViewModel.Answer" class="form-control" />
+        <span asp-validation-for="QuestionViewModel.Answer"></span>
+    </div>
+
+    <div class="col-md-2 mt-4">
+        <input type="submit" value="Submit question" class="btn btn-info" />
+    </div>
+</form>

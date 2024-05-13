@@ -1,6 +1,7 @@
 ﻿using TechQuestions.Application.Interfaces;
 using TechQuestions.Application.Mapper;
 using TechQuestions.Application.Models;
+using TechQuestions.Core.Entities;
 using TechQuestions.Core.Interfaces.Repositories;
 
 namespace TechQuestions.Application.Services
@@ -26,9 +27,13 @@ namespace TechQuestions.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<CategoryModel> Create(CategoryModel categoryModel)
+        public async Task<CategoryModel> Create(CategoryModel categoryModel)
         {
-            throw new NotImplementedException();
+            var mappedCategory = ObjectMapper.Mapper.Map<Category>(categoryModel);
+            var newCategory = await _categoryRepository.AddAsync(mappedCategory);
+
+            var newCategoryMapped = ObjectMapper.Mapper.Map<CategoryModel>(newCategory);
+            return newCategoryMapped;
         }
 
         public Task Update(CategoryModel categoryModel)

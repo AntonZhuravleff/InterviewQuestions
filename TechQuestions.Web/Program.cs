@@ -34,7 +34,8 @@ namespace TechQuestions.Web
             builder.Services.AddScoped<ITagsService, TagsService>();
 
             builder.Services.AddScoped<IQuestionViewModelService, QuestionViewModelService>();
- 
+            builder.Services.AddScoped<ICategoryViewModelService, CategoryViewModelService>();
+
             var app = builder.Build();
 
             SeedDatabase(app.Services, app.Logger).Wait();
