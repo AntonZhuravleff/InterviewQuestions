@@ -47,12 +47,13 @@ namespace TechQuestions.Application.Services
             return newQuestionMapped;
         }
 
-        public Task Delete(QuestionModel questionModel)
+        public async Task Update(QuestionModel questionModel)
         {
-            throw new NotImplementedException();
+            var mappedQuestion = ObjectMapper.Mapper.Map<Question>(questionModel);
+            await _questionRepository.UpdateAsync(mappedQuestion);
         }
 
-        public Task Update(QuestionModel questionModel)
+        public Task Delete(QuestionModel questionModel)
         {
             throw new NotImplementedException();
         }

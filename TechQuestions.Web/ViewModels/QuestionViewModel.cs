@@ -9,7 +9,7 @@ namespace TechQuestions.Web.ViewModels
         public int CategoryId { get; set; }
         public CategoryViewModel? Category { get; set; }
         public string QuestionText { get; set; }
-        public string ShortAnswer { get; set; }
+        public string? ShortAnswer { get; set; }
         public string Answer { get; set; }
     }
 }

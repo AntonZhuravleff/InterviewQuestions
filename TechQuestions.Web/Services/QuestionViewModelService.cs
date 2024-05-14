@@ -61,5 +61,12 @@ namespace TechQuestions.Web.Services
 
             await _questionAppService.Create(mappedQuestion);
         }
+
+        public async Task UpdateQuestion(QuestionViewModel questionViewModel)
+        {
+            var mappedQuestion = _mapper.Map<QuestionModel>(questionViewModel);
+
+            await _questionAppService.Update(mappedQuestion);
+        }
     }
 }

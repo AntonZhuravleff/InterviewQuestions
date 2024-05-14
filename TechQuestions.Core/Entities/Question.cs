@@ -65,8 +65,6 @@ namespace TechQuestions.Core.Entities
 
         public void SetShortAnswer(string shortAnswer)
         {
-            Guard.Against.NullOrEmpty(shortAnswer, nameof(shortAnswer));
-
             ShortAnswer = shortAnswer;
         }
 
