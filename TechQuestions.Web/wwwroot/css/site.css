@@ -17,6 +17,19 @@ body {
   margin-bottom: 60px;
 }
 
+/*Category block*/
+
+.category-block {
+    padding: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.category-block__title {
+    color: white;
+}
 
 /*Category card*/
 .category-card {
@@ -48,6 +61,11 @@ body {
 
 .question-card__body {
     margin: 1.5rem 1.5rem 1rem 1.5rem;
+}
+
+.question-card__title {
+    text-decoration: none;
+    color: black;
 }
 
 .question-card__last-updated {

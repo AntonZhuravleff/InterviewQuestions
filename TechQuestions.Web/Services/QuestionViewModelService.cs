@@ -29,6 +29,14 @@ namespace TechQuestions.Web.Services
             _mapper = mapper;
         }
 
+        public async Task<QuestionViewModel> GetQuestionById(int id)
+        {
+           var question = await _questionAppService.GetById(id);
+
+            var mappedQuestion = _mapper.Map<QuestionViewModel>(question);
+            return mappedQuestion;
+        }
+
         public async Task<QuestionsViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
         {
             var filterSpecification = new QuestionsFilterPaginatedSpecification(page * questionsPerPage, questionsPerPage, categoryId, tagIds);

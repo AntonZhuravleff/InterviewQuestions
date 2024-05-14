@@ -1,0 +1,19 @@
+﻿@page
+@model TechQuestions.Web.Pages.Questions.DetailsModel
+@{
+}
+<div class="category-block" style="background-color: @Model.QuestionViewModel.Category.Color;">
+    <h1 class="category-block__title">@Model.QuestionViewModel?.Category?.Name</h1>
+</div>
+<div class="question-details">
+    <h1 class="mb-4">@Model.QuestionViewModel.QuestionText</h1>
+
+    @if (Model.QuestionViewModel?.ShortAnswer != null)
+    {
+        <div class="mb-4">
+            <h4 class="mr-2 d-inline">Short answer: </h4> <span>@Model.QuestionViewModel?.ShortAnswer</span>
+        </div>
+    }
+
+    <p>@Model.QuestionViewModel.Answer</p>
+</div>

@@ -20,15 +20,18 @@
 
         <h2 class="h2">Questions:</h2>
         @foreach (var question in @Model.QuestionsViewModel.Questions)
-        {
+        {       
             <div class="question-card text-start mb-3">
                 <div class="row g-0">
                     <div class="col-md-9">
+                        
                         <div class="question-card__body">
-                            <h5 class="question-card__title">@question.QuestionText</h5>
+                            <a asp-page="/Questions/Details" asp-route-questionId="@question.Id" 
+                                class="question-card__title h4">@question.QuestionText</a>
                             <p class="question-card__short-answer">@question.ShortAnswer</p>
                             <p class="question-card__last-updated"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
+                        
                     </div>
                     <div class="question-card__category col-md-3 d-flex" style="background-color: @question.Category.Color;">
                         <h1 class="align-self-center">@question.Category.Name</h1>
