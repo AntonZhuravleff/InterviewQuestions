@@ -2,6 +2,7 @@
 @model TechQuestions.Web.Pages.Questions.CreateModel
 @{
 }
+<script src="~/lib/ckeditor/ckeditor.js"></script>
 
 <form method="post">
     <div class="form-group mb-3">
@@ -23,13 +24,20 @@
         <input asp-for="QuestionViewModel.ShortAnswer" class="form-control" />
         <span asp-validation-for="QuestionViewModel.ShortAnswer"></span>
     </div>
-    <div class="form-group mb-3">
+    <div class="form-group mb-3" >
         <label asp-for="QuestionViewModel.Answer"></label>
-        <input asp-for="QuestionViewModel.Answer" class="form-control" />
+        <textarea asp-for="QuestionViewModel.Answer" class="form-control ckeditor" id="editor1" ></textarea>
         <span asp-validation-for="QuestionViewModel.Answer"></span>
     </div>
-
     <div class="col-md-2 mt-4">
         <input type="submit" value="Submit question" class="btn btn-info" />
     </div>
 </form>
+
+<script>
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+</script>

@@ -2,6 +2,8 @@
 @model TechQuestions.Web.Pages.Questions.DetailsModel
 @{
 }
+<script src="~/lib/ckeditor/ckeditor.js"></script>
+
 <div class="category-block" style="background-color: @Model.QuestionViewModel.Category.Color;">
     <h1 class="category-block__title">@Model.QuestionViewModel?.Category?.Name</h1>
 </div>
@@ -15,7 +17,23 @@
         </div>
     }
 
-    <p>@Model.QuestionViewModel.Answer</p>
+    <div id="editor3">@Html.Raw(Model.QuestionViewModel.Answer)</div>
 
-    <a asp-page="/Questions/Edit" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-primary">Edit</a>
+    <a asp-page="/Questions/Edit" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-primary mt-4">Edit</a>
 </div>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor3'), {
+            // The editor's configuration.
+            // ...
+        })
+        .then(editor => {
+            const toolbarElement = editor.ui.view.toolbar.element;
+            toolbarElement.style.display = 'none';
+            editor.enableReadOnlyMode('my-feature-id');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+</script>
