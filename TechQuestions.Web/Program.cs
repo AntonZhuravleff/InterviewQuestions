@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TechQuestions.Application.Interfaces;
 using TechQuestions.Application.Services;
 using TechQuestions.Core.Interfaces.Repositories;
@@ -21,10 +22,8 @@ namespace TechQuestions.Web
             builder.Services.AddRazorPages();
             builder.Services.AddAutoMapper(typeof(Program));
 
-       
-            // use in-memory database
-            builder.Services.AddDbContext<QuestionsDbContext>(c =>
-                c.UseInMemoryDatabase("TechInterviewQuestionsDB"));
+
+            builder.Services.AddDbContext<QuestionsDbContext>();
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,12 @@ namespace TechQuestions.Infrastructure.Data
 {
     public class QuestionsDbContext : DbContext
     {
-        public QuestionsDbContext(DbContextOptions<QuestionsDbContext> options) : base(options) { }
+        private IConfiguration _configuration { get; set; }
+
+        public QuestionsDbContext(DbContextOptions<QuestionsDbContext> options, IConfiguration configuration) : base(options) 
+        { 
+            _configuration = configuration;
+        }
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -21,6 +27,12 @@ namespace TechQuestions.Infrastructure.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DatabaseConnection"));
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
