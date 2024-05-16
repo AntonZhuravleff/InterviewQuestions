@@ -5,7 +5,9 @@ using TechQuestions.Application.Models;
 using TechQuestions.Core.Entities;
 using TechQuestions.Core.Specifications;
 using TechQuestions.Web.Interfaces;
+using TechQuestions.Web.Pages;
 using TechQuestions.Web.ViewModels;
+using QuestionModel = TechQuestions.Application.Models.QuestionModel;
 
 namespace TechQuestions.Web.Services
 {
@@ -39,8 +41,13 @@ namespace TechQuestions.Web.Services
 
         public async Task<QuestionsViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
         {
-            var filterSpecification = new QuestionsFilterPaginatedSpecification(page * questionsPerPage, questionsPerPage, categoryId, tagIds);
-            var questions = await _questionAppService.ListAsync(filterSpecification);
+
+            var filterPaginatedSpecification = new QuestionsFilterPaginatedSpecification(page * questionsPerPage, questionsPerPage, categoryId, tagIds);
+            var filterSpecification = new QuestionsFilterSpecification(categoryId, tagIds);
+
+            var questions = await _questionAppService.ListAsync(filterPaginatedSpecification);
+            var totalCount = await _questionAppService.CountAsync(filterSpecification);
+
             var mappedQuestions = _mapper.Map<IEnumerable<QuestionPreviewViewModel>>(questions);
 
             var categories = await _categoryAppService.ListAsync();
@@ -49,8 +56,21 @@ namespace TechQuestions.Web.Services
             var questionsVM = new QuestionsViewModel()
             {
                 Categories = mappedCategories,
-                Questions = mappedQuestions
+                Questions = mappedQuestions,
+                PaginationInfo = new PaginationInfoViewModel()
+                {
+                    ActualPage = page,
+                    ItemsPerPage = questions.Count(),
+                    TotalItems = totalCount,
+                    TotalPages = int.Parse(Math.Ceiling(((decimal)totalCount / questionsPerPage)).ToString()),
+                }
             };
+
+            questionsVM.PaginationInfo.Next = (questionsVM.PaginationInfo.ActualPage == questionsVM.PaginationInfo.TotalPages - 1) ? 
+                "page-container__link_disabled" : "page-container__link-next";
+
+            questionsVM.PaginationInfo.Previous = (questionsVM.PaginationInfo.ActualPage == 0) ? 
+                "page-container__link_disabled" : "page-container__link-previous";
 
             return questionsVM;
         }

@@ -31,6 +31,41 @@ body {
     color: white;
 }
 
+
+/*Page container*/
+.page-container {
+    display: flex;
+    justify-content: center
+}
+
+.page-container__link {
+    margin:0 2rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.page-container__link-next {
+    content: url(../images/icons/right_arrow.png);
+}
+
+.page-container__link-previous {
+    content: url(../images/icons/left_arrow.png);
+}
+
+
+.page-container__link_disabled {
+    visibility:hidden;
+}
+
+.page-container__info {
+
+}
+
+.page-container__info-page {
+    margin: 0;
+}
+
+
 /*Category card*/
 .category-card {
     padding: 2px;

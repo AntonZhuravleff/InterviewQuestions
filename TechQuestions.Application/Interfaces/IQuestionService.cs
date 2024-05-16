@@ -13,6 +13,7 @@ namespace TechQuestions.Application.Interfaces
     {
         Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterPaginatedSpecification spec);
         Task<QuestionModel> GetById(int questionId);
+        Task<int> CountAsync(QuestionsFilterSpecification spec);
         Task<QuestionModel> Create(QuestionModel questionModel);
         Task Update(QuestionModel questionModel);
         Task Delete(QuestionModel questionModel);

@@ -38,6 +38,11 @@ namespace TechQuestions.Application.Services
             return mapped;
         }
 
+        public Task<int> CountAsync(QuestionsFilterSpecification spec)
+        {
+            return _questionRepository.CountAsync(spec);
+        }
+
         public async Task<QuestionModel> Create(QuestionModel questionModel)
         {
             var mappedQuestion = ObjectMapper.Mapper.Map<Question>(questionModel);
