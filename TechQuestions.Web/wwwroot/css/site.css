@@ -39,7 +39,7 @@ body {
 }
 
 .page-container__link {
-    margin:0 2rem;
+    margin: 0 2rem;
     width: 2rem;
     height: 2rem;
 }
@@ -54,7 +54,7 @@ body {
 
 
 .page-container__link_disabled {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .page-container__info-page {
