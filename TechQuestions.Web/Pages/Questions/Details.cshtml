@@ -22,7 +22,7 @@
     <div class="d-flex justify-content-start">
         <a asp-page="/Questions/Edit" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-primary mt-4" style="margin-right: 2rem;">Edit</a>
         <form asp-page="/Questions">
-            <button asp-page-handler="Delete" asp-route-questionId="@Model.QuestionViewModel.Id" type="submit" class="btn btn-danger mt-4">Delete</button>
+            <button asp-page-handler="Delete" onclick="askConfirmation()" asp-route-questionId="@Model.QuestionViewModel.Id" type="submit" class="btn btn-danger mt-4">Delete</button>
         </form>
     </div>
 
@@ -43,4 +43,13 @@
         .catch(error => {
             console.log(error);
         });
+</script>
+<script>
+    function askConfirmation() {
+        var result = confirm('Are you sure you want to delete this question?');
+        if (!result) {
+            event.preventDefault();
+        }
+
+    }
 </script>
