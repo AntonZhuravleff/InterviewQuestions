@@ -16,6 +16,6 @@ namespace TechQuestions.Application.Interfaces
         Task<int> CountAsync(QuestionsFilterSpecification spec);
         Task<QuestionModel> Create(QuestionModel questionModel);
         Task Update(QuestionModel questionModel);
-        Task Delete(QuestionModel questionModel);
+        Task Delete(int questionId);
     }
 }

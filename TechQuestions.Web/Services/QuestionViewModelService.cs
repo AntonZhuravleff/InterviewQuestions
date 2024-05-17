@@ -88,5 +88,10 @@ namespace TechQuestions.Web.Services
 
             await _questionAppService.Update(mappedQuestion);
         }
+
+        public async Task DeleteQuestion(int questionId)
+        {
+            await _questionAppService.Delete(questionId);
+        }
     }
 }

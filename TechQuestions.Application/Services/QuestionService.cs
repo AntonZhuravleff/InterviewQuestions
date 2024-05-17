@@ -58,9 +58,10 @@ namespace TechQuestions.Application.Services
             await _questionRepository.UpdateAsync(mappedQuestion);
         }
 
-        public Task Delete(QuestionModel questionModel)
+        public async Task Delete(int questionId)
         {
-            throw new NotImplementedException();
+            var questionToDelete = await _questionRepository.GetByIdAsync(questionId);
+            await _questionRepository.DeleteAsync(questionToDelete);
         }
     }
 }

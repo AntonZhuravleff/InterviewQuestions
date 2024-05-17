@@ -20,5 +20,11 @@ namespace TechQuestions.Web.Pages.Questions
         {
             QuestionViewModel = await _questionViewModelService.GetQuestionById(questionId);
         }
+
+        public async Task<IActionResult> OnPostDelete(int questionId)
+        {
+            await _questionViewModelService.DeleteQuestion(questionId);
+            return RedirectToPage("/Questions/Index");
+        }
     }
 }

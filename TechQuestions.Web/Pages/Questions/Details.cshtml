@@ -19,7 +19,14 @@
 
     <div id="editor3">@Html.Raw(Model.QuestionViewModel.Answer)</div>
 
-    <a asp-page="/Questions/Edit" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-primary mt-4">Edit</a>
+    <div class="d-flex justify-content-start">
+        <a asp-page="/Questions/Edit" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-primary mt-4" style="margin-right: 2rem;">Edit</a>
+        <form asp-page="/Questions">
+            <button asp-page-handler="Delete" asp-route-questionId="@Model.QuestionViewModel.Id" type="submit" class="btn btn-danger mt-4">Delete</button>
+        </form>
+    </div>
+
+    
 </div>
 
 <script>
