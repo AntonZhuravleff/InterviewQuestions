@@ -21,7 +21,7 @@ namespace TechQuestions.Web.Pages.Questions
             _questionViewModelService = questionViewModelService;
         }
 
-        public async Task OnGet(int? pageId, int selectedCategoryId)
+        public async Task OnGet(int? pageId)
         {
            int? selectedCategory = null;
            if (TempData.ContainsKey("SelectedCategoryId"))
