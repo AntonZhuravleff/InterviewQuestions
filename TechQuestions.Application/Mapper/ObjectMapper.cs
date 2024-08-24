@@ -31,6 +31,11 @@ namespace TechQuestions.Application.Mapper
                 CreateMap<Question, QuestionModel>().ReverseMap();
                 CreateMap<Category, CategoryModel>().ReverseMap();
                 CreateMap<Tag, TagModel>().ReverseMap();
+                CreateMap<Test, TestModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.Id, m => m.MapFrom(a => a.Id))
+                    .ForMember(x => x.Name, m => m.MapFrom(a => a.Name))
+                    .ForMember(d => d.Questions, o => o.Ignore());
             }
         }
     }

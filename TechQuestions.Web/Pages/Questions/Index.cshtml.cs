@@ -11,10 +11,8 @@ namespace TechQuestions.Web.Pages.Questions
         
         public QuestionsViewModel QuestionsViewModel { get; set; }
 
-
         [BindProperty]
         public int? SelectedCategoryId { get; set; }
-
 
         public IndexModel(IQuestionViewModelService questionViewModelService)
         {       

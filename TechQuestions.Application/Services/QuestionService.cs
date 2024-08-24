@@ -19,7 +19,7 @@ namespace TechQuestions.Application.Services
 
         public QuestionService(IQuestionRepository questionRepository)
         {
-            _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository)); ;
+            _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
         }
 
         public async Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterPaginatedSpecification spec)

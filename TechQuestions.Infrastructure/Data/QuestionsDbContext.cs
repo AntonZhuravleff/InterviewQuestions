@@ -22,6 +22,7 @@ namespace TechQuestions.Infrastructure.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Test> Tests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -27,13 +27,16 @@ namespace TechQuestions.Web
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
-            
+            builder.Services.AddScoped<ITestRepository, TestRepository>();
+
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ITestService, TestService>();
             builder.Services.AddScoped<ITagsService, TagsService>();
 
             builder.Services.AddScoped<IQuestionViewModelService, QuestionViewModelService>();
             builder.Services.AddScoped<ICategoryViewModelService, CategoryViewModelService>();
+            builder.Services.AddScoped<ITestViewModelService, TestViewModelService>();
 
             var app = builder.Build();
 
@@ -68,7 +71,6 @@ namespace TechQuestions.Web
                 {
                     var catalogContext = scopedProvider.GetRequiredService<QuestionsDbContext>();
                     await QuestionsDbContextSeed.SeedAsync(catalogContext, logger);
-
                 }
                 catch (Exception ex)
                 {

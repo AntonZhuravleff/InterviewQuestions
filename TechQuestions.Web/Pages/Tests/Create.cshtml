@@ -1,0 +1,15 @@
+﻿@page
+@model TechQuestions.Web.Pages.Tests.CreateModel
+@{
+}
+
+<form method="post">
+    <div class="form-group mb-3">
+        <label asp-for="TestViewModel.Name"></label>
+        <input asp-for="TestViewModel.Name" class="form-control" />
+        <span asp-validation-for="TestViewModel.Name"></span>
+    </div>
+    <div class="col-md-2 mt-4">
+        <input type="submit" value="Submit test" class="btn btn-info" />
+    </div>
+</form>

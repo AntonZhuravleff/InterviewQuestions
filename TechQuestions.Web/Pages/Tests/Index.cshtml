@@ -1,0 +1,24 @@
+﻿@page
+@model TechQuestions.Web.Pages.Tests.IndexModel
+@{
+}
+
+<div class="text-center">
+    <div class="container">
+        <ul class="d-flex justify-content-start mb-5" style="list-style-type: none;">
+            @foreach (var test in @Model.TestsViewModel.Tests)
+            {
+                <li>
+                    <a asp-page="/Tests/Details" asp-route-testId="@test.Id"
+                       class="question-card__title h4">
+                        <div class="test-card" id="test-card-id-@test.Id">
+                            <div class="test-card__name">
+                                <h5 class="test-card__name-text">@test.Name</h5>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@page
+@model TechQuestions.Web.Pages.Questions.AddToTestModel
+@{
+}
+
+<div class="text-center">
+    <div class="container">
+        <form method="post" asp-page-handler="AddQuestion">
+        
+            <ul class="d-flex justify-content-start mb-5" style="list-style-type: none;">
+                @foreach (var test in @Model.TestsViewModel.Tests)
+                {
+                    <li onclick="selectElement('testSelection', @test.Id)">
+                        <div class="test-card" id="test-card-id-@test.Id">
+                            <div class="test-card__name">
+                                <h5 class="test-card__name-text">@test.Name</h5>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            <select asp-for="@Model.TestQuestionViewModel.TestId"
+                    asp-items="@new SelectList(@Model.TestsViewModel.Tests, nameof(ViewModels.TestPreviewViewModel.Id), nameof(ViewModels.TestPreviewViewModel.Name))"
+                    class="form-control visually-hidden" id="testSelection">
+                <option value="">Select Test</option>
+            </select>
+
+            <input type="submit" value="Add to test" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+<script>
+    function selectElement(id, valueToSelect) {
+        let element = document.getElementById(id);
+        element.value = valueToSelect;
+
+        var selectedTestElems = document.getElementsByClassName('test-card_selected');
+
+        if (selectedTestElems.length > 0) {
+            selectedTestElems[0].classList.remove('test-card_selected');
+        }
+
+        let testCardElement = document.getElementById('test-card-id-' + valueToSelect);
+        testCardElement.classList.add('test-card_selected');
+    }
+</script>
