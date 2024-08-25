@@ -54,6 +54,8 @@ namespace TechQuestions.Infrastructure.Data
                 new("C#","#512bd4","category_csharp.png"),
                 new("MSSQL","#0078d4","category_mssql.png"),
                 new("Git", "#f14e32", "category_git.png"),
+                new("Architecture", "#cf0606", "category_architecture.jpg"),
+                new("Patterns", "#0c9638", "category_design-patterns.jpeg"),
             };
         }
 
