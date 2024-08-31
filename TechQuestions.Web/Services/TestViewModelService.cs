@@ -57,14 +57,6 @@ namespace TechQuestions.Web.Services
             return testsVM;
         }
 
-        public void AnswerQuestion(TestViewModel testViewModel)
-        {
-            if(testViewModel.Questions.Count > testViewModel.CurrentQuestionIndex + 1)
-            {
-                testViewModel.CurrentQuestionIndex++;
-            }         
-        }
-
         public async Task<TestViewModel> GetById(int testId)
         {
             var test = await _testAppService.GetById(testId);
