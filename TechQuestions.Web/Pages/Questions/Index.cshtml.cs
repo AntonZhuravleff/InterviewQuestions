@@ -19,15 +19,9 @@ namespace TechQuestions.Web.Pages.Questions
             _questionViewModelService = questionViewModelService;
         }
 
-        public async Task OnGet(int? pageId)
+        public async Task OnGet(int? pageId, int? categoryId)
         {
-           int? selectedCategory = null;
-           if (TempData.ContainsKey("SelectedCategoryId"))
-           {
-               selectedCategory = (int)TempData["SelectedCategoryId"];
-           }
-
-           QuestionsViewModel = await _questionViewModelService.GetQuestionsViewModel(pageId ?? 0, 5, selectedCategory, null);
+           QuestionsViewModel = await _questionViewModelService.GetQuestionsViewModel(pageId ?? 0, 5, categoryId, null);
         }
 
         public async Task<IActionResult> OnPostSearchAsync(QuestionsViewModel questionsViewModel)
@@ -38,8 +32,7 @@ namespace TechQuestions.Web.Pages.Questions
                 QuestionsViewModel = await _questionViewModelService.GetQuestionsViewModel(0, 5, selectedCategoryid, null);
             }
 
-            TempData["SelectedCategoryId"] = selectedCategoryid;
-            return Page();
+            return RedirectToPage(new { pageId = 0, categoryId = selectedCategoryid });
         }
     }
 }
