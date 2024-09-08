@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TechQuestions.Core\TechQuestions.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
 </Project>

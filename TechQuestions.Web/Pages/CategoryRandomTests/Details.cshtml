@@ -1,0 +1,96 @@
+﻿@page
+@model TechQuestions.Web.Pages.CategoryRandomTests.DetailsModel
+@{
+}
+
+<div class="test">
+    <div class="test__start-overlay">
+    </div>
+
+    <div class="test__start">
+        @if (Model.CategoryTestViewModel.TotalCount > 0)
+        {
+            <div class="test__start-name-conatainer">
+                <h1>Test:</h1>
+                <h1 class="test__start-name">@Model.CategoryTestViewModel.CategoryViewModel.Name</h1>
+            </div>
+            <div class="test__start-btn-conatainer">
+                <button onclick="startTest()" class="test__start-btn btn btn-primary display-block"> Start test</button>
+            </div>
+        }
+        else
+        {
+            <h3>No questions have been added to this test yet</h3>
+        }
+    </div>
+
+    <div id="question-container">
+        <partial name="_QuestionPartial" model="@Model.CategoryTestViewModel.CurrentQuestion" />
+    </div>
+
+    <div class="test__end display-none">
+        <h1 class="test__end-correct"></h1>
+        <h1 class="test__end-wrong"></h1>
+    </div>
+</div>
+
+<script>
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+
+    loadQuestion();
+
+    function loadQuestion() {
+        Array.from(document.getElementsByClassName('test__answer-btn')).forEach(
+            (element, index, array) => {
+                element.addEventListener('click', () => {
+                    fetch('/CategoryRandomTests/Details?handler=QuestionPartial&categoryId=@Model.CategoryTestViewModel.CategoryViewModel.Id')
+                        .then((response) => {
+                            return response.text();
+                        })
+                        .then((result) => {
+                            document.getElementById('question-container').innerHTML = result;
+                            $(".test__question").removeClass("display-none");
+
+                            loadQuestion();
+                        });
+                });
+            }
+        )
+    }
+
+    function answerQuestion(isCorrect) {
+        if (isCorrect) {
+            correctAnswers++;
+        }
+        else {
+            wrongAnswers++;
+        }
+    }
+
+    function hideStartOverlay() {
+        $(".test__start-overlay").addClass("display-none");
+        $(".test__start").addClass("display-none");
+    }
+
+    function showAnswer() {
+        let question = $(".test__question")[0];
+        question.querySelector('.test__question-answer').classList.remove("display-none");
+        question.querySelector(".test__answer-btns").classList.remove("display-none");
+        question.querySelector(".test__answer-btns").classList.add("display-flex");
+        question.querySelector(".test__show-answer-btn").classList.add("display-none");
+        question.querySelector(".test__finish-btn").classList.add("display-none");
+    }
+
+    function startTest() {
+        hideStartOverlay();
+        $(".test__question").removeClass("display-none");
+    }
+
+    function finishTest() {
+        $(".test__question").addClass("display-none");
+        $(".test__end").removeClass("display-none");
+        $(".test__end-correct").html("Correct answers: " + correctAnswers);
+        $(".test__end-wrong").html("Wrong answers: " + wrongAnswers);
+    }
+</script>

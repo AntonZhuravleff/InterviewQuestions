@@ -1,0 +1,21 @@
+﻿@model TechQuestions.Web.ViewModels.QuestionViewModel
+
+<div class="test__question display-none">
+    <div class="test__question-text">
+        <h1>@Model.QuestionText</h1>
+    </div>
+    <div class="test__question-answer display-none">
+        <p>@Html.Raw(Model.Answer)</p>
+    </div>
+    <div class="test__question-btns">
+        <button onclick="showAnswer()" class="test__show-answer-btn btn btn-primary">Show answer</button>
+        <div class="test__finish-btn-container">
+            <button onclick="finishTest()" class="test__finish-btn btn btn-secondary">Finish test</button>
+        </div>
+    </div>
+
+    <div class="test__answer-btns display-none">
+        <button onclick="answerQuestion(false)" class="test__answer-btn btn btn-danger">Wrong</button>
+        <button onclick="answerQuestion(true)" class="test__answer-btn btn btn-success">Correct</button>
+    </div>
+</div>

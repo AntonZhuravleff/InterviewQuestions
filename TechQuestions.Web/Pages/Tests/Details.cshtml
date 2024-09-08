@@ -3,68 +3,71 @@
 @{
 }
 
-<div class="test__start-overlay">
-</div>
 
-<div class="test__start">
-    @if (Model.TestViewModel.Questions.Count > 0)
-    {
-        <div class="test__start-name-conatainer">
-            <h1>Test:</h1>
-            <h1 class="test__start-name">@Model.TestViewModel.Name</h1>
-        </div>
-        <div class="test__start-btn-conatainer">
-            <div class="row">
-                <button onclick="toggleQuestionListDisplay()" class="btn btn-secondary display-block">Show questions</button>
+<div class="test">
+    <div class="test__start-overlay">
+    </div>
+
+    <div class="test__start">
+        @if (Model.TestViewModel.Questions.Count > 0)
+        {
+            <div class="test__start-name-conatainer">
+                <h1>Test:</h1>
+                <h1 class="test__start-name">@Model.TestViewModel.Name</h1>
             </div>
-            <button onclick="startTest()" class="test__start-btn btn btn-primary display-block"> Start test</button>
-        </div>
-    }
-    else
-    {
-        <h3>No questions have been added to this test yet</h3>
-    }
-</div>
+            <div class="test__start-btn-conatainer">
+                <div class="row">
+                    <button onclick="toggleQuestionListDisplay()" class="btn btn-secondary display-block">Show questions</button>
+                </div>
+                <button onclick="startTest()" class="test__start-btn btn btn-primary display-block"> Start test</button>
+            </div>
+        }
+        else
+        {
+            <h3>No questions have been added to this test yet</h3>
+        }
+    </div>
 
 
-<div class="test__question-list-container display-none">
-    <div class="test__question-list">
-        <ul>
-            @foreach (var question in @Model.TestViewModel.Questions)
-            {
-                <li>
-                    <p>@question.QuestionText</p>
-                </li>
-            }
-        </ul>
-        <div class="row">
-            <button onclick="toggleQuestionListDisplay()" class="btn btn-secondary">Back</button>
+    <div class="test__question-list-container display-none">
+        <div class="test__question-list">
+            <ul>
+                @foreach (var question in @Model.TestViewModel.Questions)
+                {
+                    <li>
+                        <p>@question.QuestionText</p>
+                    </li>
+                }
+            </ul>
+            <div class="row">
+                <button onclick="toggleQuestionListDisplay()" class="btn btn-secondary">Back</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="test__questions display-none">
-    @foreach (var question in @Model.TestViewModel.Questions)
-    {
-        <div class="test__question display-none">
-            <div class="test__question-text">
-                <h1>@question.QuestionText</h1>
-            </div>
-            <div class="test__question-answer display-none">
-                <p>@question.Answer</p>
-            </div>
-            <div class="test__question-btns">
-                <button onclick="showAnswer()" class="test_show-answer-btn btn btn-primary">Show answer</button>
-                <div class="test_answer-btns display-none">
-                    <button onclick="answerQuestion(false)" class="test_answer-btn btn btn-danger">Wrong</button>
-                    <button onclick="answerQuestion(true)" class="test_answer-btn btn btn-success">Correct</button>
+    <div class="test__questions display-none">
+        @foreach (var question in @Model.TestViewModel.Questions)
+        {
+            <div class="test__question display-none">
+                <div class="test__question-text">
+                    <h1>@question.QuestionText</h1>
+                </div>
+                <div class="test__question-answer display-none">
+                    <p>@Html.Raw(question.Answer)</p>
+                </div>
+                <div class="test__question-btns">
+                    <button onclick="showAnswer()" class="test__show-answer-btn btn btn-primary">Show answer</button>
+                    <div class="test__answer-btns display-none">
+                        <button onclick="answerQuestion(false)" class="test__answer-btn btn btn-danger">Wrong</button>
+                        <button onclick="answerQuestion(true)" class="test__answer-btn btn btn-success">Correct</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
-<div class="test__end display-none">
-    <h1 class="test__end-correct"></h1>
-    <h1 class="test__end-wrong"></h1>
+        }
+    </div>
+    <div class="test__end display-none">
+        <h1 class="test__end-correct"></h1>
+        <h1 class="test__end-wrong"></h1>
+    </div>
 </div>
 
 <script>
@@ -90,7 +93,7 @@
         }
         else {
             finishTest();
-        }     
+        }
     }
 
     function toggleQuestion(index) {
@@ -111,9 +114,9 @@
     function showAnswer() {
         let currentQuestion = questions[currentQuestionIndex];
         currentQuestion.querySelector('.test__question-answer').classList.remove("display-none");
-        currentQuestion.querySelector(".test_answer-btns").classList.remove("display-none");
-        currentQuestion.querySelector(".test_answer-btns").classList.add("display-flex");
-        currentQuestion.querySelector(".test_show-answer-btn").classList.add("display-none");
+        currentQuestion.querySelector(".test__answer-btns").classList.remove("display-none");
+        currentQuestion.querySelector(".test__answer-btns").classList.add("display-flex");
+        currentQuestion.querySelector(".test__show-answer-btn").classList.add("display-none");
     }
 
     function startTest() {

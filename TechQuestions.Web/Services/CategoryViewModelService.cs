@@ -23,5 +23,13 @@ namespace TechQuestions.Web.Services
 
             return mappedCategories;
         }
+
+        public async Task<CategoryViewModel> GetCategoryById(int id)
+        {
+            var category = await _categoryAppService.GetById(id);
+            var mappedCategory = _mapper.Map<CategoryViewModel>(category);
+
+            return mappedCategory;
+        }
     }
 }

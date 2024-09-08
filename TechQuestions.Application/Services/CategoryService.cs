@@ -22,9 +22,11 @@ namespace TechQuestions.Application.Services
             return mapped;
         }
 
-        public Task<CategoryModel> GetById(int categoryId)
+        public async Task<CategoryModel> GetById(int categoryId)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetByIdAsync(categoryId);
+            var mapped = ObjectMapper.Mapper.Map<CategoryModel>(category);
+            return mapped;
         }
 
         public async Task<CategoryModel> Create(CategoryModel categoryModel)

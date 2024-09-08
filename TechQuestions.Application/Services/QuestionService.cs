@@ -22,6 +22,13 @@ namespace TechQuestions.Application.Services
             _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
         }
 
+        public async Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterSpecification spec)
+        {
+            var questions = await _questionRepository.ListAsync(spec);
+            var mapped = ObjectMapper.Mapper.Map<IEnumerable<QuestionModel>>(questions);
+            return mapped;
+        }
+
         public async Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterPaginatedSpecification spec)
         {
             var questions = await _questionRepository.ListAsync(spec);

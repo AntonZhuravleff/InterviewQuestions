@@ -9,6 +9,7 @@ using TechQuestions.Infrastructure.Data;
 using TechQuestions.Infrastructure.Data.Repositories;
 using TechQuestions.Web.Interfaces;
 using TechQuestions.Web.Services;
+using TechQuestions.Web.ViewModels;
 
 namespace TechQuestions.Web
 {
@@ -32,11 +33,13 @@ namespace TechQuestions.Web
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ITestService, TestService>();
+            builder.Services.AddScoped<ICategoryRandomTestService, CategoryRandomTestService>();
             builder.Services.AddScoped<ITagsService, TagsService>();
 
             builder.Services.AddScoped<IQuestionViewModelService, QuestionViewModelService>();
             builder.Services.AddScoped<ICategoryViewModelService, CategoryViewModelService>();
             builder.Services.AddScoped<ITestViewModelService, TestViewModelService>();
+            builder.Services.AddScoped<ICategoryRandomTestViewModelService, CategoryRandomTestViewModelService>();
 
             var app = builder.Build();
 

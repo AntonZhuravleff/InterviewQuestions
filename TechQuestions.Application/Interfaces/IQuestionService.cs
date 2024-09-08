@@ -11,6 +11,7 @@ namespace TechQuestions.Application.Interfaces
 {
     public interface IQuestionService
     {
+        Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterSpecification spec);
         Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterPaginatedSpecification spec);
         Task<QuestionModel> GetById(int questionId);
         Task<int> CountAsync(QuestionsFilterSpecification spec);

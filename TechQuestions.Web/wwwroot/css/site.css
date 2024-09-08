@@ -181,16 +181,27 @@ body {
     margin: 0 auto;
 }
 
-.test_show-answer-btn {
+.test__show-answer-btn {
     width: 100%;
+    padding: 1rem 0;
     margin-top: 3rem;
 }
 
-.test_answer-btns {
+.test__finish-btn-container{
+    display: flex;
+    justify-content: center
+}
+
+.test__finish-btn {
+    width: 30%;
+    margin-top: 5rem;
+}
+
+.test__answer-btns {
     justify-content: space-around;
 }
 
-.test_answer-btn {
+.test__answer-btn {
     padding: 1rem 4rem;
 }
 
