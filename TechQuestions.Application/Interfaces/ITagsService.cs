@@ -8,6 +8,6 @@ namespace TechQuestions.Application.Interfaces
         Task<TagModel> GetById(int tagId);
         Task<TagModel> Create(TagModel tagModel);
         Task Update(TagModel tagModel);
-        Task Delete(TagModel tagModel);
+        Task Delete(int tagId);
     }
 }

@@ -1,33 +1,53 @@
 ﻿using TechQuestions.Application.Interfaces;
 using TechQuestions.Application.Models;
+using TechQuestions.Core.Interfaces.Repositories;
+using TechQuestions.Application.Mapper;
+using TechQuestions.Core.Entities;
 
 namespace TechQuestions.Application.Services
 {
     public class TagsService : ITagsService
     {
-        public Task<IEnumerable<TagModel>> ListAsync()
+        private readonly ITagsRepository _tagsRepository;
+
+        public TagsService(ITagsRepository tagsRepository)
         {
-            throw new NotImplementedException();
+            _tagsRepository = tagsRepository ?? throw new ArgumentNullException(nameof(tagsRepository));
         }
 
-        public Task<TagModel> GetById(int tagId)
+        public async Task<IEnumerable<TagModel>> ListAsync()
         {
-            throw new NotImplementedException();
+            var tags = await _tagsRepository.ListAsync();
+            var mapped = ObjectMapper.Mapper.Map<IEnumerable<TagModel>>(tags);
+            return mapped;
         }
 
-        public Task<TagModel> Create(TagModel tagModel)
+        public async Task<TagModel> GetById(int tagId)
         {
-            throw new NotImplementedException();
+            var tag = await _tagsRepository.GetByIdAsync(tagId);
+            var mapped = ObjectMapper.Mapper.Map<TagModel>(tag);
+            return mapped;
         }
 
-        public Task Delete(TagModel tagModel)
+        public async Task<TagModel> Create(TagModel tagModel)
         {
-            throw new NotImplementedException();
+            var mappedTag = ObjectMapper.Mapper.Map<Tag>(tagModel);
+            var newTag = await _tagsRepository.AddAsync(mappedTag);
+
+            var newTagMapped = ObjectMapper.Mapper.Map<TagModel>(newTag);
+            return newTagMapped;
         }
 
-        public Task Update(TagModel tagModel)
+        public async Task Update(TagModel tagModel)
         {
-            throw new NotImplementedException();
+            var mappedQuestion = ObjectMapper.Mapper.Map<Tag>(tagModel);
+            await _tagsRepository.UpdateAsync(mappedQuestion);
+        }
+
+        public async Task Delete(int tagId)
+        {
+            var tagToDelete = await _tagsRepository.GetByIdAsync(tagId);
+            await _tagsRepository.DeleteAsync(tagToDelete);
         }
     }
 }

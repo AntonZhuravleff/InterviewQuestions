@@ -29,6 +29,7 @@ namespace TechQuestions.Web
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
             builder.Services.AddScoped<ITestRepository, TestRepository>();
+            builder.Services.AddScoped<ITagsRepository, TagsRepository>();
 
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -40,6 +41,7 @@ namespace TechQuestions.Web
             builder.Services.AddScoped<ICategoryViewModelService, CategoryViewModelService>();
             builder.Services.AddScoped<ITestViewModelService, TestViewModelService>();
             builder.Services.AddScoped<ICategoryRandomTestViewModelService, CategoryRandomTestViewModelService>();
+            builder.Services.AddScoped<ITagsViewModelService, TagsViewModelService>();
 
             var app = builder.Build();
 
