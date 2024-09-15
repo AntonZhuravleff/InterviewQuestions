@@ -10,8 +10,8 @@ namespace TechQuestions.Core.Specifications
             Query
                 .Where(q => (tagIds == null || tagIds.Contains(q.Id)) &&
                 (!categoryId.HasValue || q.CategoryId == categoryId))
-                .Include(q => q.Category);
-
+                .Include(q => q.Category)
+                .Include(q => q.Tags);
         }
     }
 }

@@ -38,10 +38,15 @@
             <div class="question-card text-start mb-3">
                 <div class="row g-0">
                     <div class="col-md-9">
-                        
                         <div class="question-card__body">
                             <a asp-page="/Questions/Details" asp-route-questionId="@question.Id" 
                                 class="question-card__title h4">@question.QuestionText</a>
+                            <div class="question-card__tags">
+                                @foreach (var tag in question.Tags)
+                                {
+                                    <span class="question-card__tag">@tag.Name</span>
+                                }
+                            </div>
                             <p class="question-card__short-answer">@question.ShortAnswer</p>
                             <p class="question-card__last-updated"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>

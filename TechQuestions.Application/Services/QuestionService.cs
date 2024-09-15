@@ -40,9 +40,9 @@ namespace TechQuestions.Application.Services
 
         public async Task<QuestionModel> GetById(int questionId)
         {
-            var quesionWithCategorySpec = new QuestionByIdWithCategorySpecification(questionId);
+            var quesionWithCategoryAndTagsSpec = new QuestionByIdWithCategoryAndTagsSpecification(questionId);
 
-            var question = await _questionRepository.GetBySpecAsync(quesionWithCategorySpec);
+            var question = await _questionRepository.GetBySpecAsync(quesionWithCategoryAndTagsSpec);
             var mapped = ObjectMapper.Mapper.Map<QuestionModel>(question);
             return mapped;
         }

@@ -8,7 +8,15 @@
     <h1 class="category-block__title">@Model.QuestionViewModel?.Category?.Name</h1>
 </div>
 <div class="question-details">
-    <h1 class="mb-4">@Model.QuestionViewModel.QuestionText</h1>
+    <div class="question-details__header">
+        <h1 class="mb-3">@Model.QuestionViewModel.QuestionText</h1>
+        <div class="question-details__tags">
+            @foreach (var tag in @Model.QuestionViewModel.Tags)
+            {
+                <span class="question-details__tag">@tag.Name</span>
+            }
+        </div>
+    </div>
 
     @if (Model.QuestionViewModel?.ShortAnswer != null)
     {
