@@ -39,6 +39,14 @@ namespace TechQuestions.Web.Services
             return mappedQuestion;
         }
 
+        public async Task<QuestionViewModel> GetQuestionByIdWithTags(int id)
+        {
+            var question = await _questionAppService.GetByIdWithTags(id);
+
+            var mappedQuestion = _mapper.Map<QuestionViewModel>(question);
+            return mappedQuestion;
+        }
+
         public async Task<QuestionsViewModel> GetQuestionsViewModel(int page, int questionsPerPage, int? categoryId, List<int>? tagIds)
         {
 
@@ -92,6 +100,11 @@ namespace TechQuestions.Web.Services
         public async Task DeleteQuestion(int questionId)
         {
             await _questionAppService.Delete(questionId);
+        }
+
+        public async Task SetQuestionTags(int questionId, IEnumerable<int> tagsIds)
+        {
+            await _questionAppService.SetTags(questionId, tagsIds);
         }
     }
 }

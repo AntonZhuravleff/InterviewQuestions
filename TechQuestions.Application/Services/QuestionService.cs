@@ -16,10 +16,12 @@ namespace TechQuestions.Application.Services
     public class QuestionService : IQuestionService
     {
         private readonly IQuestionRepository _questionRepository;
+        private readonly ITagsRepository _tagsRepository;
 
-        public QuestionService(IQuestionRepository questionRepository)
+        public QuestionService(IQuestionRepository questionRepository, ITagsRepository tagsRepository)
         {
             _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
+            _tagsRepository = tagsRepository ?? throw new ArgumentNullException(nameof(tagsRepository));
         }
 
         public async Task<IEnumerable<QuestionModel>> ListAsync(QuestionsFilterSpecification spec)
@@ -43,6 +45,26 @@ namespace TechQuestions.Application.Services
             var question = await _questionRepository.GetBySpecAsync(quesionWithCategorySpec);
             var mapped = ObjectMapper.Mapper.Map<QuestionModel>(question);
             return mapped;
+        }
+
+        public async Task<QuestionModel> GetByIdWithTags(int questionId)
+        {
+            var quesionWithCategorySpec = new QuestionByIdWithTagsSpecification(questionId);
+
+            var question = await _questionRepository.GetBySpecAsync(quesionWithCategorySpec);
+            var mapped = ObjectMapper.Mapper.Map<QuestionModel>(question);
+            return mapped;
+        }
+
+        public async Task SetTags(int questionId, IEnumerable<int> tagsIds)
+        {
+            var quesionWithCategorySpec = new QuestionByIdWithTagsSpecification(questionId);
+            var question = await _questionRepository.GetBySpecAsync(quesionWithCategorySpec);
+
+            var tags = await _tagsRepository.ListAsync(new TagsByIdsSpecification(tagsIds.ToList()));
+
+            question.SetTags(tags);
+            await _questionRepository.UpdateAsync(question);
         }
 
         public Task<int> CountAsync(QuestionsFilterSpecification spec)

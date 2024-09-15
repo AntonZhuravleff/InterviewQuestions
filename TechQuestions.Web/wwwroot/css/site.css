@@ -232,6 +232,11 @@ body {
     margin: 0.3rem;
 }
 
+.tag-list__item_selected {
+    border: solid 3px green;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
+
 .tag-list__item-delete-btn {
     background: url(../images/icons/red_cross.png) no-repeat;
     background-size: 100%;

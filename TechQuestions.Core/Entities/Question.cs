@@ -10,7 +10,7 @@ namespace TechQuestions.Core.Entities
 {
     public class Question : BaseEntity
     {
-        private readonly List<Tag> _tags = new List<Tag>();
+        private List<Tag> _tags = new List<Tag>();
         public IReadOnlyCollection<Tag> Tags => _tags.AsReadOnly();
 
         public int CategoryId { get; set; }
@@ -35,7 +35,7 @@ namespace TechQuestions.Core.Entities
             CategoryId = categoryId;
             SetQuestionText(questionText);
             SetAnswer(answer);
-            AppendTags(tags);
+            SetTags(tags);
         }
 
         public Question(int categoryId, string questionText, string shortAnswer, string answer, IEnumerable<Tag> tags)
@@ -46,7 +46,7 @@ namespace TechQuestions.Core.Entities
             SetQuestionText(questionText);
             SetShortAnswer(shortAnswer);
             SetAnswer(answer);
-            AppendTags(tags);
+            SetTags(tags);
         }
 
         public void SetQuestionText(string questionText)
@@ -68,27 +68,11 @@ namespace TechQuestions.Core.Entities
             ShortAnswer = shortAnswer;
         }
 
-        public void AppendTag(Tag tagToAppend)
-        {
-            Guard.Against.Null(tagToAppend, nameof(tagToAppend));
-
-            var existingTag = Tags.FirstOrDefault(t => t.Id == tagToAppend.Id);
-            if (existingTag != null)
-            {
-                throw new ArgumentException("Tag with same Id has already been added to question");
-            }
-
-            _tags.Add(tagToAppend);
-        }
-
-        protected void AppendTags(IEnumerable<Tag> tags)
+        public void SetTags(IEnumerable<Tag> tags)
         {
             if (tags != null)
             {
-                foreach (Tag tag in tags)
-                {
-                    AppendTag(tag);
-                }
+                _tags = tags.ToList();
             }
         }
     }

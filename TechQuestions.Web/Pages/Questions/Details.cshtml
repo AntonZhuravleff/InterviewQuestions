@@ -21,6 +21,7 @@
 
     <div class="d-flex justify-content-start">
         <a asp-page="/Questions/AddToTest" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-secondary mt-4" style="margin-right: 2rem;">Add to test</a>
+        <a asp-page="/Questions/QuestionTags" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-secondary mt-4" style="margin-right: 2rem;">Tags</a>
         <a asp-page="/Questions/Edit" asp-route-questionId="@Model.QuestionViewModel.Id" class="btn btn-primary mt-4" style="margin-right: 2rem;">Edit</a>     
         <form asp-page="/Questions">
             <button asp-page-handler="Delete" onclick="askConfirmation()" asp-route-questionId="@Model.QuestionViewModel.Id" type="submit" class="btn btn-danger mt-4">Delete</button>

@@ -1,0 +1,60 @@
+﻿@page
+@model TechQuestions.Web.Pages.Questions.QuestionTagsModel
+@{
+}
+<div class="text-center">
+    <div class="container">
+        <form method="post" asp-page-handler="SelectTags" asp-route-questionId="@Model.QuestionWithTags.Id">
+
+            <div class="tag-list">
+                @foreach (var tag in @Model.Tags)
+                {
+                    <div onclick="selectElement('tagSelection', @tag.Id)">
+                        <div class="tag-list__item" id="tag-id-@tag.Id">
+                            <div class="test-card__name">
+                                <span class="tag-list__item-name">@tag.Name</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <select asp-for="@Model.SelectedTagsIds"
+                    asp-items="@new SelectList(@Model.Tags, nameof(ViewModels.TagViewModel.Id), nameof(ViewModels.TagViewModel.Id))"
+                    class="form-control select-list visually-hidden" id="tagSelection">
+                <option value="">Select Tags</option>
+            </select>
+            
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+
+
+<script>
+    setSelectedElements();
+
+    function selectElement(id, valueToSelect) {
+        let select = document.getElementById(id);
+        let selectedElem = $(`.select-list option[value="${valueToSelect}"]`);
+        let tagElement = document.getElementById('tag-id-' + valueToSelect);
+
+        if (selectedElem.prop('selected')) {
+            selectedElem.prop('selected', false);
+            tagElement.classList.remove('tag-list__item_selected');
+        }
+        else {
+            selectedElem.prop('selected', true);
+            tagElement.classList.add('tag-list__item_selected');
+        }      
+    }
+
+    function setSelectedElements() {
+        let selectedElems = $(`.select-list option[selected]`);
+
+        for (const element of selectedElems) {
+            let tagElement = document.getElementById('tag-id-' + element.value);
+            tagElement.classList.add('tag-list__item_selected');
+        }
+    }
+</script>
