@@ -7,7 +7,6 @@
         <form method="post" asp-page-handler="Search">
             <ul class="d-flex justify-content-start mb-5" style="list-style-type: none;">
 
-
                 @foreach (var category in @Model.QuestionsViewModel.Categories)
                 {
                     <li onclick="selectCategory('categorySelection', @category.Id)">
@@ -25,8 +24,6 @@
                         class="form-control select-category-list visually-hidden" id="categorySelection">
                     <option value="">Select category</option>
                 </select>
-
-
 
             </ul>
 
