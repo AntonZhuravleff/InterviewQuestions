@@ -22,7 +22,7 @@
                 }
                 <select asp-for="@Model.SelectedCategoryId"
                         asp-items="@new SelectList(@Model.QuestionsViewModel.Categories, nameof(ViewModels.CategoryViewModel.Id), nameof(ViewModels.CategoryViewModel.Name))"
-                        class="form-control select-category-list" id="categorySelection">
+                        class="form-control select-category-list visually-hidden" id="categorySelection">
                     <option value="">Select category</option>
                 </select>
 
