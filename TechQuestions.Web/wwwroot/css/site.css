@@ -75,6 +75,7 @@ body {
 
 
 /*Category card*/
+
 .category-card {
     padding: 1rem;
     width: 10rem;
@@ -276,4 +277,25 @@ body {
     width: 1rem;
     height: 1rem;
     margin-left: 1.5rem;
+}
+
+.questions-tag-list {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 3rem;
+}
+
+.questions-tag-list__item {
+    display: flex;
+    justify-content: space-around;
+    border: solid 1px #cdcdcd;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+    padding: 0.5rem 1rem;
+    margin: 0.3rem;
+}
+
+.questions-tag-list__item_selected {
+    border: solid 3px green;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
 }

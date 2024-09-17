@@ -61,9 +61,13 @@ namespace TechQuestions.Web.Services
             var categories = await _categoryAppService.ListAsync();
             var mappedCategories = _mapper.Map<IEnumerable<CategoryViewModel>>(categories);
 
+            var tags = await _tagsAppService.ListAsync();
+            var mappedTags = _mapper.Map<IEnumerable<TagViewModel>>(tags);
+
             var questionsVM = new QuestionsViewModel()
             {
                 Categories = mappedCategories,
+                Tags = mappedTags,
                 Questions = mappedQuestions,
                 PaginationInfo = new PaginationInfoViewModel()
                 {

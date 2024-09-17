@@ -5,42 +5,59 @@
 <div class="text-center">
     <div class="container">
         <form method="post" asp-page-handler="Search">
-        <ul class="d-flex justify-content-start mb-5" style ="list-style-type: none;">
-            
+            <ul class="d-flex justify-content-start mb-5" style="list-style-type: none;">
 
-            @foreach (var category in @Model.QuestionsViewModel.Categories)
-            {
-                    <li onclick="selectElement('categorySelection', @category.Id)">
+
+                @foreach (var category in @Model.QuestionsViewModel.Categories)
+                {
+                    <li onclick="selectCategory('categorySelection', @category.Id)">
                         <div class="category-card" id="category-card-id-@category.Id">
-                         
-                        <img class="category-card__image" src="@(Constants.CATEGORY_IMAGES_PATH + category.ImageName)" alt="@category.Name">
-                        <div class="category-card__name" style="background-color: @category.Color;">
-                            <h5 class="category-card__name-text">@category.Name</h5>
-                        </div>
-                    </div>
-                </li>
-            }
 
+                            <img class="category-card__image" src="@(Constants.CATEGORY_IMAGES_PATH + category.ImageName)" alt="@category.Name">
+                            <div class="category-card__name" style="background-color: @category.Color;">
+                                <h5 class="category-card__name-text">@category.Name</h5>
+                            </div>
+                        </div>
+                    </li>
+                }
                 <select asp-for="@Model.SelectedCategoryId"
                         asp-items="@new SelectList(@Model.QuestionsViewModel.Categories, nameof(ViewModels.CategoryViewModel.Id), nameof(ViewModels.CategoryViewModel.Name))"
-                        class="form-control visually-hidden" id="categorySelection" >
+                        class="form-control select-category-list" id="categorySelection">
                     <option value="">Select category</option>
                 </select>
 
-  
-        </ul>
-        <input type="submit" value="Search" class="btn btn-primary" />
+
+
+            </ul>
+
+            <div class="questions-tag-list">
+                @foreach (var tag in @Model.QuestionsViewModel.Tags)
+                {
+                    <div onclick="selectTag('tagSelection', @tag.Id)">
+                        <div class="questions-tag-list__item" id="tag-id-@tag.Id">
+                            <span class="questions-tag-list__item-name">@tag.Name</span>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <select asp-for="@Model.SelectedTagsIds"
+                    asp-items="@new SelectList(@Model.QuestionsViewModel.Tags, nameof(ViewModels.TagViewModel.Id), nameof(ViewModels.TagViewModel.Id))"
+                    class="form-control select-tags-list visually-hidden" id="tagSelection">
+                <option value="">Select Tags</option>
+            </select>
+            <input type="submit" value="Search" class="btn btn-primary" />
         </form>
 
         <h2 class="h2">Questions:</h2>
         @foreach (var question in @Model.QuestionsViewModel.Questions)
-        {       
+        {
             <div class="question-card text-start mb-3">
                 <div class="row g-0">
                     <div class="col-md-9">
                         <div class="question-card__body">
-                            <a asp-page="/Questions/Details" asp-route-questionId="@question.Id" 
-                                class="question-card__title h4">@question.QuestionText</a>
+                            <a asp-page="/Questions/Details" asp-route-questionId="@question.Id"
+                               class="question-card__title h4">@question.QuestionText</a>
                             <div class="question-card__tags">
                                 @foreach (var tag in question.Tags)
                                 {
@@ -50,7 +67,7 @@
                             <p class="question-card__short-answer">@question.ShortAnswer</p>
                             <p class="question-card__last-updated"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
-                        
+
                     </div>
                     <div class="question-card__category col-md-3 d-flex" style="background-color: @question.Category.Color;">
                         <h1 class="align-self-center">@question.Category.Name</h1>
@@ -62,7 +79,10 @@
     </div>
 </div>
 <script>
-    function selectElement(id, valueToSelect) {
+    setSelectedCategory();
+    setSelectedTags();
+
+    function selectCategory(id, valueToSelect) {
         let element = document.getElementById(id);
         element.value = valueToSelect;
 
@@ -74,5 +94,35 @@
 
         let categoryCardElement = document.getElementById('category-card-id-' + valueToSelect);
         categoryCardElement.classList.add('category-card_selected');
+    }
+
+    function selectTag(id, valueToSelect) {
+        let select = document.getElementById(id);
+        let selectedElem = $(`.select-tags-list option[value="${valueToSelect}"]`);
+        let tagElement = document.getElementById('tag-id-' + valueToSelect);
+
+        if (selectedElem.prop('selected')) {
+            selectedElem.prop('selected', false);
+            tagElement.classList.remove('questions-tag-list__item_selected');
+        }
+        else {
+            selectedElem.prop('selected', true);
+            tagElement.classList.add('questions-tag-list__item_selected');
+        }
+    }
+
+    function setSelectedCategory() {
+        let selectedCategory = $(`.select-category-list option[selected]`)[0];
+        let categoryElement = document.getElementById('category-card-id-' + selectedCategory.value);
+        categoryElement.classList.add('category-card_selected');
+    }
+
+    function setSelectedTags() {
+        let selectedElems = $(`.select-tags-list option[selected]`);
+
+        for (const element of selectedElems) {
+            let tagElement = document.getElementById('tag-id-' + element.value);
+            tagElement.classList.add('questions-tag-list__item_selected');
+        }
     }
 </script>

@@ -6,33 +6,30 @@ using TechQuestions.Web.ViewModels;
 namespace TechQuestions.Web.Pages.Questions
 {
     public class IndexModel : PageModel
-    {  
+    {
         private readonly IQuestionViewModelService _questionViewModelService;
-        
+
         public QuestionsViewModel QuestionsViewModel { get; set; }
 
         [BindProperty]
         public int? SelectedCategoryId { get; set; }
 
+        [BindProperty]
+        public IEnumerable<int> SelectedTagsIds { get; set; }
+
         public IndexModel(IQuestionViewModelService questionViewModelService)
-        {       
+        {
             _questionViewModelService = questionViewModelService;
         }
 
-        public async Task OnGet(int? pageId, int? categoryId)
+        public async Task OnGet(int? pageId, int? categoryId, IEnumerable<int>? tagsIds)
         {
-           QuestionsViewModel = await _questionViewModelService.GetQuestionsViewModel(pageId ?? 0, 5, categoryId, null);
+            QuestionsViewModel = await _questionViewModelService.GetQuestionsViewModel(pageId ?? 0, 5, categoryId, tagsIds?.ToList());
         }
 
-        public async Task<IActionResult> OnPostSearchAsync(QuestionsViewModel questionsViewModel)
+        public async Task<IActionResult> OnPostSearchAsync()
         {
-            int selectedCategoryid = questionsViewModel.SelectedCategoryId;    
-            if (selectedCategoryid > 0)
-            {
-                QuestionsViewModel = await _questionViewModelService.GetQuestionsViewModel(0, 5, selectedCategoryid, null);
-            }
-
-            return RedirectToPage(new { pageId = 0, categoryId = selectedCategoryid });
+            return RedirectToPage(new { pageId = 0, categoryId = SelectedCategoryId, tagsIds = SelectedTagsIds });
         }
     }
 }
