@@ -42,6 +42,7 @@ namespace TechQuestions.Web
             builder.Services.AddScoped<ITestViewModelService, TestViewModelService>();
             builder.Services.AddScoped<ICategoryRandomTestViewModelService, CategoryRandomTestViewModelService>();
             builder.Services.AddScoped<ITagsViewModelService, TagsViewModelService>();
+            builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
             var app = builder.Build();
 

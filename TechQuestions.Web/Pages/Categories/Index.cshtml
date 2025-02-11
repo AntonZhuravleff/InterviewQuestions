@@ -1,0 +1,42 @@
+﻿@page
+@model TechQuestions.Web.Pages.Categories.IndexModel
+@{
+}
+<div class="text-center">
+    <div class="container">
+        <ul class="d-flex justify-content-start mb-5" style="list-style-type: none;">
+            @foreach (var category in @Model.CategoriesViewModel.Categories)
+            {
+                <li>
+                    <div class="category-card" id="category-card-id-@category.Id">
+                        <img class="category-card__image" src="@(Constants.CATEGORY_IMAGES_PATH + category.ImageName)" alt="@category.Name">
+                        <div class="category-card__name" style="background-color: @category.Color;">
+                            <h5 class="category-card__name-text">@category.Name</h5>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group mb-3">
+
+        <label asp-for="CategoryToAdd">Category to add</label>
+        <input asp-for="CategoryToAdd.Name" class="form-control" />
+        <span asp-validation-for="CategoryToAdd.Name"></span>
+
+        <label asp-for="CategoryToAdd.ImageFile" class="mt-1">Image file</label>
+        <input asp-for="CategoryToAdd.ImageFile" class="form-control" />
+        <span asp-validation-for="CategoryToAdd.ImageFile"></span>
+
+        <label asp-for="CategoryToAdd.Color" class="mt-1">Color</label>
+        <input asp-for="CategoryToAdd.Color" class="form-control" />
+        <span asp-validation-for="CategoryToAdd.Color"></span>
+
+    </div>
+    <div class="col-md-2 mt-4">
+        <input type="submit" value="Submit category" class="btn btn-info" />
+    </div>
+</form>

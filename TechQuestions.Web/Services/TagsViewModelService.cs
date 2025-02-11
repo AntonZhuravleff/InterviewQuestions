@@ -27,8 +27,7 @@ namespace TechQuestions.Web.Services
 
         public async Task<TagsViewModel> GetTagsViewModel()
         {
-            var tags = await GetAllTags();
-            return new TagsViewModel { Tags = tags };
+            return new TagsViewModel { Tags = await GetAllTags() };
         }
 
         public async Task AddTag(TagViewModel tagViewModel)
